@@ -1,0 +1,28 @@
+<h2>ログイン中です</h2>
+<p> <%= link_to '新規ツイート' , new_tweet_path %> </p>
+<p><%= link_to "ログアウト",top_logout_path %></p>
+<p> <%= link_to 'ユーザー一覧', users_path%>
+
+
+<% @tweets.each do |a| %>
+    <p>
+        [メッセージ]
+        <%= a.message %>
+        
+        [ログインid]
+        <% begin %>
+            <%= User.find(a.user_id).uid %>
+            
+        <% rescue %>
+            IDは削除されました
+        <% end %>
+        
+        <%= link_to '削除', "/tweets/#{a.id}", method: :delete %>
+        
+        
+        
+        
+    </p>
+    
+<% end %>
+<%= "ログインID: " + session[:login_uid] + "さん" %>

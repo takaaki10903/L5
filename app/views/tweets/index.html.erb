@@ -1,0 +1,12 @@
+<h2> ツイート一覧 </h2>
+
+<% @tweets.each do |a| %>
+    <p>
+        [メッセージ]
+        <%= a.message %>
+        
+        <%= link_to '削除', "/tweets/#{a.id}", method: :delete %>
+    </p>
+<% end %>
+
+<p> <%= link_to '新規ツイート' , new_tweet_path %> </p>
