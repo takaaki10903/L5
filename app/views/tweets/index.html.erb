@@ -4,7 +4,13 @@
     <p>
         [メッセージ]
         <%= a.message %>
-        
+        <>
+        <% if Like.where(user_id: @user, tweet_id: a.id).exists? %>
+            <%= link_to 'いいね削除', like_path(a.id), method: :delete %>
+        <% else %>
+            <%= link_to 'いいね', likes_path(tweet_id: a.id), method: :post %>
+        <% end %>
+
         <%= link_to '削除', "/tweets/#{a.id}", method: :delete %>
     </p>
 <% end %>

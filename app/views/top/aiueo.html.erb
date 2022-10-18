@@ -15,22 +15,27 @@
             <%= User.find(a.user_id).uid %>
             
         <% rescue %>
-            IDは削除されています
+            IDは削除されました
         <% end %>
         
-        <% begin %>
-            
+        <% begin %><!-- 誰もいいねしていない場合errorが出るのを回避 -->
+        <!-- u:良いねしているユーザ --->
+        <!-- array:良いねしているユーザの配列 --->
+            <% array=[] %>
             <% u = @likes.where(tweet_id: a.id) %>
             <% u.each do |u2| %>
+                <%= u2 %>
+                <% array.push(User.find(u2.user_id).uid) %>
+            <!-- もしいいねしていたらflg true --->
                 <% if User.find(u2.user_id).uid == session[:login_uid] %>
                     <% flg = 1 %>
                 <% end %>
             <% end %>
         
         <% rescue %>
-            
+            <% u = 404 %>
         <% end %>
-        
+        <%= flg %>
         <% if flg == 1 %>
             <%= link_to 'いいね削除', like_path(a), method: :delete %>
         <% else %>

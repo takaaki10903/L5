@@ -1,6 +1,8 @@
 class TopController < ApplicationController
     def main
         @tweets = Tweet.all
+        @likes = Like.all
+        @users = User.all
         if session[:login_uid]
             render "main"
         

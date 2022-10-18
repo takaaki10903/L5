@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   resources :users
   resources :tweets
-  #resources :likes
+  resources :likes
   
   #root 'users#index'
   #root 'tweets#index'
