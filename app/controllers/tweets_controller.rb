@@ -10,12 +10,12 @@ class TweetsController < ApplicationController
   
   def create
     #@users = User.all
-    id = User.find_by(uid:session[:login_uid])
-    @tweets = Tweet.new(message: params[:tweet][:message],user_id: id.id)
-    ##@tweets = @user.tweets.new(message: params[:tweet][:message])
-    ##@tweets = Tweet.new(message: params[:tweet][:message])
-    #@tweets.save
-    #redirect_to '/'
+    
+    #id = User.find_by(uid: session[:login_uid])
+    
+    
+    #@tweets = Tweet.new(message: params[:tweet][:message],user_id: id.id)
+    @tweets = Tweet.new(message: params[:tweet][:message],user_id: current_user.id)
     if @tweets.save
         redirect_to '/'
     else

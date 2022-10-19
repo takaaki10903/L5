@@ -9,12 +9,15 @@ class UsersController < ApplicationController
     
     def create
         
-        @users =  User.new(uid: params[:user][:uid], pass: BCrypt::Password.create(params[:user][:pass]))
+        #@users =  User.new(uid: params[:user][:uid], pass: BCrypt::Password.create(params[:user][:pass]))
+        @users = User.new(uid: params[:user][:uid], password: params[:user][:password], password_confirmation:params[:user][:password_confirmation])
+        
+        
         #@users = User.new(uid: params[:user][:uid], pass: params[:user][:pass])
         if @users.save
             redirect_to '/'
         else
-            flash[:notice] = 'アカウントが被っています'
+            flash[:notice] = 'パスワードとパスワード確認が一致しません'
             #render 'new'
             redirect_to '/'
         end
